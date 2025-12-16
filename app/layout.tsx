@@ -12,23 +12,23 @@ export const metadata: Metadata = {
   title: "TechStore - Premium Electronics & Tech Accessories",
   description:
     "Shop the latest tech products, electronics, and accessories at unbeatable prices in Myanmar Kyat (MMK). Free shipping on orders over 210,000 MMK.",
-  generator: "v0.app",
+  generator: "otas",
   icons: {
     icon: [
       {
-        url: "/icon-light-32x32.png",
+        url: "/otas.png",
         media: "(prefers-color-scheme: light)",
       },
       {
-        url: "/icon-dark-32x32.png",
+        url: "/otas.png",
         media: "(prefers-color-scheme: dark)",
       },
       {
-        url: "/icon.svg",
+        url: "/otas.png",
         type: "image/svg+xml",
       },
     ],
-    apple: "/apple-icon.png",
+    apple: "/otas.png",
   },
 };
 

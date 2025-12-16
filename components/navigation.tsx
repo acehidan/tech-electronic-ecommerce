@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useCart } from "@/lib/cart-context";
 import { CartSheet } from "@/components/cart-sheet";
+import Image from "next/image";
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,9 +20,9 @@ export function Navigation() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg bg-primary" />
+              <Image src="/otas.png" alt="Logo" width={32} height={32} />
               <span className="text-xl font-bold text-foreground">
-                TechStore
+                OTAS TechStore
               </span>
             </Link>
 
