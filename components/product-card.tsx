@@ -1,22 +1,36 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Star, ShoppingCart } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { formatPrice } from "@/lib/format-price"
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { Star, ShoppingCart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { formatPrice } from "@/lib/format-price";
+import { useCart } from "@/lib/cart-context";
 
 interface ProductCardProps {
-  id: string
-  name: string
-  price: number
-  originalPrice?: number
-  rating: number
-  reviews: number
-  image: string
+  id: string;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  rating: number;
+  reviews: number;
+  image: string;
 }
 
-export function ProductCard({ id, name, price, originalPrice, rating, reviews, image }: ProductCardProps) {
-  const discount = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0
+export function ProductCard({
+  id,
+  name,
+  price,
+  originalPrice,
+  rating,
+  reviews,
+  image,
+}: ProductCardProps) {
+  const { addItem } = useCart();
+  const discount = originalPrice
+    ? Math.round(((originalPrice - price) / originalPrice) * 100)
+    : 0;
 
   return (
     <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300">
@@ -46,7 +60,11 @@ export function ProductCard({ id, name, price, originalPrice, rating, reviews, i
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
                 key={i}
-                className={`h-3 w-3 ${i < Math.floor(rating) ? "fill-accent text-accent" : "fill-muted text-muted"}`}
+                className={`h-3 w-3 ${
+                  i < Math.floor(rating)
+                    ? "fill-accent text-accent"
+                    : "fill-muted text-muted"
+                }`}
               />
             ))}
           </div>
@@ -55,17 +73,26 @@ export function ProductCard({ id, name, price, originalPrice, rating, reviews, i
         <div className="flex items-center justify-between">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-lg font-bold text-primary">{formatPrice(price)}</span>
+              <span className="text-lg font-bold text-primary">
+                {formatPrice(price)}
+              </span>
               {originalPrice && (
-                <span className="text-sm text-muted-foreground line-through">{formatPrice(originalPrice)}</span>
+                <span className="text-sm text-muted-foreground line-through">
+                  {formatPrice(originalPrice)}
+                </span>
               )}
             </div>
           </div>
-          <Button size="icon" variant="outline" className="h-9 w-9 bg-transparent">
+          <Button
+            size="icon"
+            variant="outline"
+            className="h-9 w-9 bg-transparent hover:bg-primary hover:text-primary-foreground"
+            onClick={() => addItem(id)}
+          >
             <ShoppingCart className="h-4 w-4" />
           </Button>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
