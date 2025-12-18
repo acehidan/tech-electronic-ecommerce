@@ -4,14 +4,15 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
+import { LanguageProvider } from "@/lib/language-context";
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TechStore - Premium Electronics & Tech Accessories",
+  title: "OTAS-store",
   description:
-    "Shop the latest tech products, electronics, and accessories at unbeatable prices in Myanmar Kyat (MMK). Free shipping on orders over 210,000 MMK.",
+    "Shop the latest construction tool at unbeatable prices in Myanmar Kyat (MMK). Free shipping on orders over 210,000 MMK.",
   generator: "otas",
   icons: {
     icon: [
@@ -40,8 +41,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans antialiased`}>
-        <CartProvider>{children}</CartProvider>
-        <Analytics />
+        <LanguageProvider>
+          <CartProvider>{children}</CartProvider>
+          <Analytics />
+        </LanguageProvider>
       </body>
     </html>
   );

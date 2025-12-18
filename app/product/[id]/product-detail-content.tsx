@@ -21,6 +21,8 @@ import Link from "next/link";
 import { Navigation } from "@/components/navigation";
 import { useCart } from "@/lib/cart-context";
 
+import { useLanguage } from "@/lib/language-context";
+
 export function ProductDetailContent({
   product,
   categoryName,
@@ -33,6 +35,7 @@ export function ProductDetailContent({
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const { addItem } = useCart();
+  const { t, language } = useLanguage();
 
   // Mock multiple images for the gallery based on the main image
   const images = [product.image, product.image, product.image, product.image];
@@ -45,7 +48,7 @@ export function ProductDetailContent({
         {/* Breadcrumb */}
         <div className="mb-8 text-sm text-muted-foreground">
           <Link href="/" className="hover:text-primary">
-            Home
+            {t("home")}
           </Link>{" "}
           /{" "}
           <Link
@@ -54,7 +57,12 @@ export function ProductDetailContent({
           >
             {categoryName}
           </Link>{" "}
-          / <span className="text-foreground">{product.name}</span>
+          /{" "}
+          <span className="text-foreground">
+            {language === "my" && product.name_my
+              ? product.name_my
+              : product.name}
+          </span>
         </div>
 
         {/* Product Details */}
@@ -96,7 +104,9 @@ export function ProductDetailContent({
           {/* Product Info */}
           <div>
             <h1 className="text-3xl font-bold text-foreground mb-4">
-              {product.name}
+              {language === "my" && product.name_my
+                ? product.name_my
+                : product.name}
             </h1>
 
             {/* Rating */}
@@ -114,7 +124,7 @@ export function ProductDetailContent({
                 ))}
               </div>
               <span className="text-muted-foreground">
-                ({product.reviews} reviews)
+                ({product.reviews} {t("reviews")})
               </span>
             </div>
 
@@ -129,7 +139,7 @@ export function ProductDetailContent({
                     {formatPrice(product.originalPrice)}
                   </span>
                   <span className="px-3 py-1 bg-destructive text-destructive-foreground rounded-md font-semibold">
-                    Save{" "}
+                    {t("save")}{" "}
                     {Math.round(
                       ((product.originalPrice - product.price) /
                         product.originalPrice) *
@@ -142,15 +152,18 @@ export function ProductDetailContent({
             </div>
 
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Experience superior performance with the {product.name}. Designed
-              for professionals and enthusiasts alike, this product combines
-              reliability with cutting-edge technology.
+              Experience superior performance with the{" "}
+              {language === "my" && product.name_my
+                ? product.name_my
+                : product.name}
+              . Designed for professionals and enthusiasts alike, this product
+              combines reliability with cutting-edge technology.
             </p>
 
             {/* Quantity */}
             <div className="mb-6">
               <label className="text-sm font-semibold text-foreground mb-2 block">
-                Quantity
+                {t("quantity")}
               </label>
               <div className="flex items-center gap-3">
                 <Button
@@ -181,11 +194,11 @@ export function ProductDetailContent({
                 onClick={() => addItem(product.id, quantity)}
               >
                 <ShoppingCart className="mr-2 h-5 w-5" />
-                Add to Cart
+                {t("addToCart")}
               </Button>
               <Button size="lg" variant="outline">
                 <Heart className="mr-2 h-5 w-5" />
-                Wishlist
+                {t("wishlist")}
               </Button>
               <Button
                 size="lg"
@@ -203,9 +216,11 @@ export function ProductDetailContent({
                   <Truck className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground">Free Shipping</p>
+                  <p className="font-semibold text-foreground">
+                    {t("freeShipping")}
+                  </p>
                   <p className="text-sm text-muted-foreground">
-                    On orders over 210,000 MMK
+                    {t("freeShippingDesc")}
                   </p>
                 </div>
               </div>
@@ -215,10 +230,10 @@ export function ProductDetailContent({
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">
-                    2 Year Warranty
+                    {t("warranty")}
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Extended protection included
+                    {t("warrantyDesc")}
                   </p>
                 </div>
               </div>
@@ -228,10 +243,10 @@ export function ProductDetailContent({
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">
-                    30 Day Returns
+                    {t("returns30")}
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Hassle-free returns
+                    {t("returnsDesc")}
                   </p>
                 </div>
               </div>
@@ -242,22 +257,27 @@ export function ProductDetailContent({
         {/* Product Tabs */}
         <Tabs defaultValue="description" className="mb-16">
           <TabsList className="w-full justify-start">
-            <TabsTrigger value="description">Description</TabsTrigger>
-            <TabsTrigger value="specifications">Specifications</TabsTrigger>
+            <TabsTrigger value="description">{t("description")}</TabsTrigger>
+            <TabsTrigger value="specifications">
+              {t("specifications")}
+            </TabsTrigger>
             <TabsTrigger value="reviews">
-              Reviews ({product.reviews})
+              {t("reviews")} ({product.reviews})
             </TabsTrigger>
           </TabsList>
           <TabsContent value="description" className="mt-6">
             <div className="prose prose-gray max-w-none">
               <h3 className="text-xl font-semibold text-foreground mb-4">
-                Product Description
+                {t("productDescription")}
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                The {product.name} represents the pinnacle of {categoryName}{" "}
-                technology. Meticulously engineered to provide exceptional
-                performance and durability, it meets the rigorous demands of
-                modern users.
+                The{" "}
+                {language === "my" && product.name_my
+                  ? product.name_my
+                  : product.name}{" "}
+                represents the pinnacle of {categoryName} technology.
+                Meticulously engineered to provide exceptional performance and
+                durability, it meets the rigorous demands of modern users.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 Whether you're using it for work, entertainment, or creative
@@ -265,7 +285,7 @@ export function ProductDetailContent({
                 design ensures it looks as good as it performs.
               </p>
               <h4 className="text-lg font-semibold text-foreground mb-3 mt-6">
-                Key Features:
+                {t("keyFeatures")}
               </h4>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                 <li>High-performance components for reliable operation</li>
@@ -280,21 +300,23 @@ export function ProductDetailContent({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h4 className="font-semibold text-foreground mb-4">
-                  Technical Specifications
+                  {t("techSpecs")}
                 </h4>
                 <dl className="space-y-3">
                   <div className="flex justify-between py-2 border-b border-border">
-                    <dt className="text-muted-foreground">Model</dt>
+                    <dt className="text-muted-foreground">{t("model")}</dt>
                     <dd className="font-medium text-foreground">
                       {product.id.padStart(4, "0")} - {categoryName} Series
                     </dd>
                   </div>
                   <div className="flex justify-between py-2 border-b border-border">
-                    <dt className="text-muted-foreground">Release Year</dt>
+                    <dt className="text-muted-foreground">
+                      {t("releaseYear")}
+                    </dt>
                     <dd className="font-medium text-foreground">2024</dd>
                   </div>
                   <div className="flex justify-between py-2 border-b border-border">
-                    <dt className="text-muted-foreground">Warranty</dt>
+                    <dt className="text-muted-foreground">{t("warranty")}</dt>
                     <dd className="font-medium text-foreground">2 Years</dd>
                   </div>
                 </dl>
@@ -316,11 +338,11 @@ export function ProductDetailContent({
                         ))}
                       </div>
                       <span className="font-semibold text-foreground">
-                        Verified Buyer
+                        {t("verifiedBuyer")}
                       </span>
                     </div>
                     <span className="text-sm text-muted-foreground">
-                      {review} weeks ago
+                      {review} {t("weeksAgo")}
                     </span>
                   </div>
                   <p className="text-muted-foreground leading-relaxed">
@@ -338,11 +360,19 @@ export function ProductDetailContent({
         {relatedProducts.length > 0 && (
           <section>
             <h2 className="text-2xl font-bold text-foreground mb-6">
-              Related Products
+              {t("relatedProducts")}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map((p) => (
-                <ProductCard key={p.id} {...p} />
+                <ProductCard
+                  key={p.id}
+                  {...p}
+                  name={
+                    language === "my" && (p as any).name_my
+                      ? (p as any).name_my
+                      : p.name
+                  }
+                />
               ))}
             </div>
           </section>

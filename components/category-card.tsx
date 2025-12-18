@@ -1,14 +1,17 @@
-import Link from "next/link"
-import { Card, CardContent } from "@/components/ui/card"
+import Link from "next/link";
+import { Card, CardContent } from "@/components/ui/card";
+import { useLanguage } from "@/lib/language-context";
 
 interface CategoryCardProps {
-  name: string
-  icon: string
-  count: number
-  slug: string
+  name: string;
+  icon: string;
+  count: number;
+  slug: string;
 }
 
 export function CategoryCard({ name, icon, count, slug }: CategoryCardProps) {
+  const { t } = useLanguage();
+
   return (
     <Link href={`/categories/${slug}`}>
       <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer">
@@ -18,10 +21,14 @@ export function CategoryCard({ name, icon, count, slug }: CategoryCardProps) {
               <span className="text-3xl">{icon}</span>
             </div>
           </div>
-          <h3 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">{name}</h3>
-          <p className="text-sm text-muted-foreground">{count} Products</p>
+          <h3 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+            {name}
+          </h3>
+          <p className="text-sm text-muted-foreground">
+            {count} {t("products")}
+          </p>
         </CardContent>
       </Card>
     </Link>
-  )
+  );
 }

@@ -1,17 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingCart, User, Search, Menu } from "lucide-react";
+import { ShoppingCart, User, Search, Menu, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useCart } from "@/lib/cart-context";
+import { useLanguage } from "@/lib/language-context";
 import { CartSheet } from "@/components/cart-sheet";
 import Image from "next/image";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { cartCount, isCartOpen, openCart, closeCart } = useCart();
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <>
@@ -22,7 +30,7 @@ export function Navigation() {
             <Link href="/" className="flex items-center space-x-2">
               <Image src="/otas.png" alt="Logo" width={32} height={32} />
               <span className="text-xl font-bold text-foreground">
-                OTAS TechStore
+                OTAS Store
               </span>
             </Link>
 
@@ -32,7 +40,7 @@ export function Navigation() {
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   type="search"
-                  placeholder="Search for products..."
+                  placeholder={t("searchPlaceholder")}
                   className="w-full pl-10"
                 />
               </div>
@@ -44,24 +52,40 @@ export function Navigation() {
                 href="/categories"
                 className="text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
-                Categories
+                {t("categories")}
               </Link>
               <Link
                 href="/products"
                 className="text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
-                New Products
+                {t("newProducts")}
               </Link>
               <Link
                 href="/account"
                 className="text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
-                Account
+                {t("account")}
               </Link>
             </nav>
 
             {/* Icons */}
             <div className="flex items-center space-x-4">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <Globe className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => setLanguage("my")}>
+                    မြန်မာ
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLanguage("en")}>
+                    English
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
               <Button variant="ghost" size="icon" className="hidden md:flex">
                 <User className="h-5 w-5" />
               </Button>

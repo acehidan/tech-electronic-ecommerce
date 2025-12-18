@@ -17,7 +17,10 @@ import { Filter, X } from "lucide-react";
 import { useState } from "react";
 import { products, categories } from "@/lib/data";
 
+import { useLanguage } from "@/lib/language-context";
+
 export default function ProductsPage() {
+  const { t, language } = useLanguage();
   const [showFilters, setShowFilters] = useState(false);
   const [priceRange, setPriceRange] = useState([0, 2100000]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -73,10 +76,13 @@ export default function ProductsPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-foreground mb-2">
-            All Products
+            {t("allProducts")}
           </h1>
           <p className="text-muted-foreground">
-            Showing {filteredProducts.length} results
+            {t("showingResults").replace(
+              "{count}",
+              filteredProducts.length.toString()
+            )}
           </p>
         </div>
 
@@ -89,7 +95,7 @@ export default function ProductsPage() {
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
                   <Filter className="h-5 w-5" />
-                  Filters
+                  {t("filters")}
                 </h2>
                 <Button
                   variant="ghost"
@@ -103,7 +109,9 @@ export default function ProductsPage() {
 
               {/* Category Filter */}
               <div className="mb-6 pb-6 border-b border-border">
-                <h3 className="font-semibold text-foreground mb-4">Category</h3>
+                <h3 className="font-semibold text-foreground mb-4">
+                  {t("category")}
+                </h3>
                 <div className="space-y-3">
                   <div className="flex items-center">
                     <Checkbox
@@ -117,7 +125,7 @@ export default function ProductsPage() {
                       htmlFor="all"
                       className="ml-2 text-sm text-foreground cursor-pointer"
                     >
-                      All Products
+                      {t("allProductsLabel")}
                     </Label>
                   </div>
                   {categories.map((category) => (
@@ -131,7 +139,7 @@ export default function ProductsPage() {
                         htmlFor={category.slug}
                         className="ml-2 text-sm text-foreground cursor-pointer"
                       >
-                        {category.name}
+                        {t(`cat_${category.slug.replace("-", "_")}` as any)}
                       </Label>
                     </div>
                   ))}
@@ -141,7 +149,7 @@ export default function ProductsPage() {
               {/* Price Range Filter */}
               <div className="mb-6 pb-6 border-b border-border">
                 <h3 className="font-semibold text-foreground mb-4">
-                  Price Range
+                  {t("priceRange")}
                 </h3>
                 <div className="px-2">
                   <Slider
@@ -160,31 +168,31 @@ export default function ProductsPage() {
 
               {/* Brand Filter (Visual only for now) */}
               <div className="mb-6 pb-6 border-b border-border">
-                <h3 className="font-semibold text-foreground mb-4">Brand</h3>
+                <h3 className="font-semibold text-foreground mb-4">
+                  {t("brand")}
+                </h3>
                 <div className="space-y-3">
-                  {[
-                    "TechBrand",
-                    "ElectroMax",
-                    "GadgetPro",
-                    "InnoTech",
-                    "SmartDevices",
-                  ].map((brand) => (
-                    <div key={brand} className="flex items-center">
-                      <Checkbox id={brand} />
-                      <Label
-                        htmlFor={brand}
-                        className="ml-2 text-sm text-foreground cursor-pointer"
-                      >
-                        {brand}
-                      </Label>
-                    </div>
-                  ))}
+                  {["Makita", "Bosch", "DeWalt", "Stanley", "Milwaukee"].map(
+                    (brand) => (
+                      <div key={brand} className="flex items-center">
+                        <Checkbox id={brand} />
+                        <Label
+                          htmlFor={brand}
+                          className="ml-2 text-sm text-foreground cursor-pointer"
+                        >
+                          {brand}
+                        </Label>
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
 
               {/* Rating Filter (Visual only for now) */}
               <div className="mb-6">
-                <h3 className="font-semibold text-foreground mb-4">Rating</h3>
+                <h3 className="font-semibold text-foreground mb-4">
+                  {t("rating")}
+                </h3>
                 <div className="space-y-3">
                   {[5, 4, 3, 2, 1].map((rating) => (
                     <div key={rating} className="flex items-center">
@@ -193,7 +201,7 @@ export default function ProductsPage() {
                         htmlFor={`rating-${rating}`}
                         className="ml-2 text-sm text-foreground cursor-pointer"
                       >
-                        {rating}★ & up
+                        {rating}★ {t("up")}
                       </Label>
                     </div>
                   ))}
@@ -205,7 +213,7 @@ export default function ProductsPage() {
                 variant="outline"
                 onClick={clearFilters}
               >
-                Clear All Filters
+                {t("clearAllFilters")}
               </Button>
             </div>
           </aside>
@@ -221,24 +229,28 @@ export default function ProductsPage() {
                 onClick={() => setShowFilters(true)}
               >
                 <Filter className="h-4 w-4 mr-2" />
-                Filters
+                {t("filters")}
               </Button>
               <div className="flex items-center gap-2 ml-auto">
-                <span className="text-sm text-muted-foreground">Sort by:</span>
+                <span className="text-sm text-muted-foreground">
+                  {t("sortBy")}
+                </span>
                 <Select value={sortOption} onValueChange={setSortOption}>
                   <SelectTrigger className="w-[180px]">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="featured">Featured</SelectItem>
+                    <SelectItem value="featured">
+                      {t("sortFeatured")}
+                    </SelectItem>
                     <SelectItem value="price-low">
-                      Price: Low to High
+                      {t("sortPriceLow")}
                     </SelectItem>
                     <SelectItem value="price-high">
-                      Price: High to Low
+                      {t("sortPriceHigh")}
                     </SelectItem>
-                    <SelectItem value="rating">Highest Rated</SelectItem>
-                    <SelectItem value="newest">Newest</SelectItem>
+                    <SelectItem value="rating">{t("sortRating")}</SelectItem>
+                    <SelectItem value="newest">{t("sortNewest")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -248,16 +260,24 @@ export default function ProductsPage() {
             {filteredProducts.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProducts.map((product) => (
-                  <ProductCard key={product.id} {...product} />
+                  <ProductCard
+                    key={product.id}
+                    {...product}
+                    name={
+                      language === "my" && (product as any).name_my
+                        ? (product as any).name_my
+                        : product.name
+                    }
+                  />
                 ))}
               </div>
             ) : (
               <div className="text-center py-20">
                 <p className="text-lg text-muted-foreground">
-                  No products found matching your filters.
+                  {t("noProductsFound")}
                 </p>
                 <Button variant="link" onClick={clearFilters} className="mt-2">
-                  Clear filters
+                  {t("clearFilters")}
                 </Button>
               </div>
             )}
@@ -266,13 +286,13 @@ export default function ProductsPage() {
             {filteredProducts.length > 0 && (
               <div className="mt-12 flex justify-center gap-2">
                 <Button variant="outline" size="sm" disabled>
-                  Previous
+                  {t("previous")}
                 </Button>
                 <Button variant="default" size="sm">
                   1
                 </Button>
                 <Button variant="outline" size="sm">
-                  Next
+                  {t("next")}
                 </Button>
               </div>
             )}

@@ -8,6 +8,7 @@ import { formatPrice } from "@/lib/format-price";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useLanguage } from "@/lib/language-context";
 
 interface CartSheetProps {
   isOpen: boolean;
@@ -18,6 +19,7 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
   const { items, removeItem, updateQuantity, cartTotal, clearCart } = useCart();
   const [mounted, setMounted] = useState(false);
   const [showCheckoutModal, setShowCheckoutModal] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     setMounted(true);
@@ -58,7 +60,7 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
           <div className="flex items-center justify-between border-b px-6 py-4">
             <h2 className="text-lg font-semibold flex items-center gap-2">
               <ShoppingCart className="h-5 w-5" />
-              Your Cart
+              {t("yourCart")}
             </h2>
             <Button variant="ghost" size="icon" onClick={onClose}>
               <X className="h-4 w-4" />
@@ -73,12 +75,12 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
                   <ShoppingCart className="h-10 w-10 text-muted-foreground" />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="font-semibold text-lg">Your cart is empty</h3>
+                  <h3 className="font-semibold text-lg">{t("cartEmpty")}</h3>
                   <p className="text-muted-foreground text-sm max-w-xs">
-                    Looks like you haven't added anything to your cart yet.
+                    {t("cartEmptyDesc")}
                   </p>
                 </div>
-                <Button onClick={onClose}>Start Shopping</Button>
+                <Button onClick={onClose}>{t("startShopping")}</Button>
               </div>
             ) : (
               <div className="space-y-6">
@@ -163,11 +165,11 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
           {items.length > 0 && (
             <div className="border-t px-6 py-4 space-y-4">
               <div className="flex items-center justify-between text-base font-semibold">
-                <span>Total</span>
+                <span>{t("total")}</span>
                 <span>{formatPrice(cartTotal)}</span>
               </div>
               <p className="text-xs text-muted-foreground text-center">
-                Shipping and taxes calculated at checkout.
+                {t("shippingTaxCalc")}
               </p>
               <div className="grid gap-2">
                 <Button
@@ -175,14 +177,14 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
                   size="lg"
                   onClick={() => setShowCheckoutModal(true)}
                 >
-                  Checkout
+                  {t("checkout")}
                 </Button>
                 <Button
                   variant="outline"
                   className="w-full"
                   onClick={clearCart}
                 >
-                  Clear Cart
+                  {t("clearCart")}
                 </Button>
               </div>
             </div>
@@ -194,20 +196,22 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
       {showCheckoutModal && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4 animate-in fade-in duration-200">
           <div className="bg-background p-6 rounded-lg shadow-lg max-w-sm w-full animate-in zoom-in-95 duration-200">
-            <h3 className="text-xl font-bold mb-2 text-center">Demo Store</h3>
+            <h3 className="text-xl font-bold mb-2 text-center">
+              {t("demoStore")}
+            </h3>
             <div className="flex justify-center mb-4">
               <div className="h-12 w-12 rounded-full bg-yellow-100 flex items-center justify-center">
                 <ShoppingCart className="h-6 w-6 text-yellow-600" />
               </div>
             </div>
             <p className="text-muted-foreground text-center mb-6">
-              This is a demo project. Checkout functionality is not available.
+              {t("demoMessage")}
             </p>
             <Button
               onClick={() => setShowCheckoutModal(false)}
               className="w-full"
             >
-              Got it
+              {t("gotIt")}
             </Button>
           </div>
         </div>
