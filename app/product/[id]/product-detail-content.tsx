@@ -83,11 +83,10 @@ export function ProductDetailContent({
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`aspect-square rounded-lg overflow-hidden bg-secondary border-2 transition-all ${
-                    selectedImage === index
-                      ? "border-primary"
-                      : "border-transparent"
-                  }`}
+                  className={`aspect-square rounded-lg overflow-hidden bg-secondary border-2 transition-all ${selectedImage === index
+                    ? "border-primary"
+                    : "border-transparent"
+                    }`}
                 >
                   <Image
                     src={image || "/placeholder.svg"}
@@ -110,30 +109,29 @@ export function ProductDetailContent({
             </h1>
 
             {/* Rating */}
-            <div className="flex items-center gap-4 mb-6">
+            {/* <div className="flex items-center gap-4 mb-6">
               <div className="flex items-center gap-1">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star
                     key={i}
-                    className={`h-5 w-5 ${
-                      i < Math.floor(product.rating)
-                        ? "fill-accent text-accent"
-                        : "fill-muted text-muted"
-                    }`}
+                    className={`h-5 w-5 ${i < Math.floor(product.rating)
+                      ? "fill-accent text-accent"
+                      : "fill-muted text-muted"
+                      }`}
                   />
                 ))}
               </div>
               <span className="text-muted-foreground">
                 ({product.reviews} {t("reviews")})
               </span>
-            </div>
+            </div> */}
 
             {/* Price */}
             <div className="flex items-center gap-4 mb-6">
               <span className="text-4xl font-bold text-primary">
                 {formatPrice(product.price)}
               </span>
-              {product.originalPrice && (
+              {/* {product.originalPrice && (
                 <>
                   <span className="text-2xl text-muted-foreground line-through">
                     {formatPrice(product.originalPrice)}
@@ -143,21 +141,21 @@ export function ProductDetailContent({
                     {Math.round(
                       ((product.originalPrice - product.price) /
                         product.originalPrice) *
-                        100
+                      100
                     )}
                     %
                   </span>
                 </>
-              )}
+              )} */}
             </div>
 
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Experience superior performance with the{" "}
+              Ensure your health with the{" "}
               {language === "my" && product.name_my
                 ? product.name_my
                 : product.name}
-              . Designed for professionals and enthusiasts alike, this product
-              combines reliability with cutting-edge technology.
+              . Carefully selected for safety and effectiveness, this product
+              combines healthcare expertise with premium quality standards.
             </p>
 
             {/* Quantity */}
@@ -187,7 +185,7 @@ export function ProductDetailContent({
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row gap-4 mb-8 h-12">
               <Button
                 size="lg"
                 className="flex-1"
@@ -196,7 +194,7 @@ export function ProductDetailContent({
                 <ShoppingCart className="mr-2 h-5 w-5" />
                 {t("addToCart")}
               </Button>
-              <Button size="lg" variant="outline">
+              {/* <Button size="lg" variant="outline">
                 <Heart className="mr-2 h-5 w-5" />
                 {t("wishlist")}
               </Button>
@@ -206,11 +204,11 @@ export function ProductDetailContent({
                 className="sm:w-auto bg-transparent"
               >
                 <Share2 className="h-5 w-5" />
-              </Button>
+              </Button> */}
             </div>
 
             {/* Features */}
-            <div className="space-y-4 pt-6 border-t border-border">
+            {/* <div className="space-y-4 pt-6 border-t border-border">
               <div className="flex items-center gap-3">
                 <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
                   <Truck className="h-5 w-5 text-primary" />
@@ -250,18 +248,29 @@ export function ProductDetailContent({
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
         {/* Product Tabs */}
         <Tabs defaultValue="description" className="mb-16">
-          <TabsList className="w-full justify-start">
-            <TabsTrigger value="description">{t("description")}</TabsTrigger>
-            <TabsTrigger value="specifications">
+          <TabsList className="w-full justify-start overflow-x-auto overflow-y-hidden flex-nowrap scrollbar-hide bg-transparent border-b rounded-none h-auto p-0 space-x-8">
+            <TabsTrigger
+              value="description"
+              className="rounded-none border-b-2 border-transparent data-[state=active]:border-b-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-4 px-0 whitespace-nowrap"
+            >
+              {t("description")}
+            </TabsTrigger>
+            <TabsTrigger
+              value="specifications"
+              className="rounded-none border-b-2 border-transparent data-[state=active]:border-b-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-4 px-0 whitespace-nowrap"
+            >
               {t("specifications")}
             </TabsTrigger>
-            <TabsTrigger value="reviews">
+            <TabsTrigger
+              value="reviews"
+              className="rounded-none border-b-2 border-transparent data-[state=active]:border-b-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-4 px-0 whitespace-nowrap"
+            >
               {t("reviews")} ({product.reviews})
             </TabsTrigger>
           </TabsList>
@@ -275,24 +284,24 @@ export function ProductDetailContent({
                 {language === "my" && product.name_my
                   ? product.name_my
                   : product.name}{" "}
-                represents the pinnacle of {categoryName} technology.
-                Meticulously engineered to provide exceptional performance and
-                durability, it meets the rigorous demands of modern users.
+                represents the highest standard of {categoryName} care.
+                Meticulously developed to provide pharmaceutical-grade support,
+                it meets the rigorous safety requirements of healthcare essentials.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Whether you're using it for work, entertainment, or creative
-                projects, this product delivers consistent results. Its sleek
-                design ensures it looks as good as it performs.
+                Whether for daily wellness or specific health needs,
+                this product delivers reliable results. Its packaging ensures
+                maximum hygiene and freshness.
               </p>
               <h4 className="text-lg font-semibold text-foreground mb-3 mt-6">
                 {t("keyFeatures")}
               </h4>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                <li>High-performance components for reliable operation</li>
-                <li>Premium build quality and materials</li>
-                <li>Intuitive design for ease of use</li>
-                <li>Energy-efficient technology</li>
-                <li>Comprehensive manufacturer warranty</li>
+                <li>Quality-tested for safety and effectiveness</li>
+                <li>Clinical grade materials and ingredients</li>
+                <li>Clear dosage instructions and easy storage</li>
+                <li>Hygienic and secure packaging</li>
+                <li>Authentic healthcare product guarantee</li>
               </ul>
             </div>
           </TabsContent>

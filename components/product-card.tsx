@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Star, ShoppingCart } from "lucide-react";
+import { Star, ShoppingCart, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatPrice } from "@/lib/format-price";
@@ -27,7 +27,10 @@ export function ProductCard({
   reviews,
   image,
 }: ProductCardProps) {
-  const { addItem } = useCart();
+  const { addItem, updateQuantity, items } = useCart();
+  const cartItem = items.find((item) => item.productId === id);
+  const quantity = cartItem ? cartItem.quantity : 0;
+
   const discount = originalPrice
     ? Math.round(((originalPrice - price) / originalPrice) * 100)
     : 0;
@@ -42,20 +45,20 @@ export function ProductCard({
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          {discount > 0 && (
+          {/* {discount > 0 && (
             <div className="absolute top-3 left-3 bg-destructive text-destructive-foreground px-2 py-1 rounded-md text-xs font-semibold">
               -{discount}%
             </div>
-          )}
+          )} */}
         </div>
       </Link>
       <CardContent className="p-4">
         <Link href={`/product/${id}`}>
-          <h3 className="font-semibold text-sm text-foreground line-clamp-2 mb-2 group-hover:text-primary transition-colors">
+          <h3 className="font-semibold h-10 text-sm text-foreground line-clamp-2 mb-2 group-hover:text-primary transition-colors">
             {name}
           </h3>
         </Link>
-        <div className="flex items-center gap-1 mb-2">
+        {/* <div className="flex items-center gap-1 mb-2">
           <div className="flex items-center">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
@@ -69,28 +72,50 @@ export function ProductCard({
             ))}
           </div>
           <span className="text-xs text-muted-foreground">({reviews})</span>
-        </div>
-        <div className="flex items-center justify-between">
+        </div> */}
+        <div className="flex flex-col gap-4">
           <div>
             <div className="flex items-center gap-2">
               <span className="text-lg font-bold text-primary">
                 {formatPrice(price)}
               </span>
-              {originalPrice && (
+              {/* {originalPrice && (
                 <span className="text-sm text-muted-foreground line-through">
                   {formatPrice(originalPrice)}
                 </span>
-              )}
+              )} */}
             </div>
           </div>
-          <Button
-            size="icon"
-            variant="outline"
-            className="h-9 w-9 bg-transparent hover:bg-primary hover:text-primary-foreground"
-            onClick={() => addItem(id)}
-          >
-            <ShoppingCart className="h-4 w-4" />
-          </Button>
+          <div className="flex items-center gap-2">
+            <div className="flex w-full items-center justify-between bg-primary/10 rounded-lg overflow-hidden border border-primary/20">
+              <Button
+                size="icon"
+                variant="ghost"
+                className="h-8 w-8 text-primary hover:bg-primary hover:text-primary-foreground rounded-none"
+                onClick={() => updateQuantity(id, quantity - 1)}
+                disabled={quantity === 0}
+              >
+                <Minus className="h-4 w-4" />
+              </Button>
+              <span className="w-8 text-center text-sm font-bold text-primary">
+                {quantity}
+              </span>
+              <Button
+                size="icon"
+                variant="ghost"
+                className="h-8 w-8 text-primary hover:bg-primary hover:text-primary-foreground rounded-none"
+                onClick={() => {
+                  if (quantity === 0) {
+                    addItem(id, 1, false);
+                  } else {
+                    updateQuantity(id, quantity + 1);
+                  }
+                }}
+              >
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
         </div>
       </CardContent>
     </Card>

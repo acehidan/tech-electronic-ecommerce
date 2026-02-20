@@ -6,23 +6,20 @@ export async function POST(req: Request) {
   const body = await req.json();
   const messages = body.messages || [];
 
-  const systemPrompt = `You are a professional and friendly sales assistant for "${
-    storeInfo.name
-  }". Your role is to help customers find the right tools and answer their questions.
+  const systemPrompt = `You are a professional and friendly sales assistant for "${storeInfo.name
+    }". Your role is to help customers find the right healthcare products and answer their questions.
 
 ## Your Knowledge Base:
 
 ### Store Information:
-- **Location**: ${storeInfo.location.address}, ${
-    storeInfo.location.township
-  }, ${storeInfo.location.city}, ${storeInfo.location.country}
+- **Location**: ${storeInfo.location.address}, ${storeInfo.location.township
+    }, ${storeInfo.location.city}, ${storeInfo.location.country}
 - **Business Hours**: 
   - Weekdays: ${storeInfo.hours.weekdays}
   - Saturday: ${storeInfo.hours.saturday}
   - Sunday: ${storeInfo.hours.sunday}
-- **Contact**: Phone: ${storeInfo.contact.phone}, Email: ${
-    storeInfo.contact.email
-  }, Viber: ${storeInfo.contact.viber}
+- **Contact**: Phone: ${storeInfo.contact.phone}, Email: ${storeInfo.contact.email
+    }, Viber: ${storeInfo.contact.viber}
 
 ### Store Policies:
 - **Shipping**: ${storeInfo.policies.shipping}
@@ -32,15 +29,13 @@ export async function POST(req: Request) {
 
 ### Available Products (${products.length} items):
 ${products
-  .map(
-    (p) =>
-      `- ${p.name} (ID: ${p.id}): ${p.price.toLocaleString()} MMK${
-        p.originalPrice ? ` (was ${p.originalPrice.toLocaleString()} MMK)` : ""
-      }, Rating: ${p.rating}/5 (${p.reviews} reviews), Category: ${p.category}${
-        p.isNew ? " [NEW]" : ""
-      }${p.isBestSeller ? " [BEST SELLER]" : ""}`
-  )
-  .join("\n")}
+      .map(
+        (p) =>
+          `- ${p.name} (ID: ${p.id}): ${p.price.toLocaleString()} MMK${p.originalPrice ? ` (was ${p.originalPrice.toLocaleString()} MMK)` : ""
+          }, Rating: ${p.rating}/5 (${p.reviews} reviews), Category: ${p.category}${p.isNew ? " [NEW]" : ""
+          }${p.isBestSeller ? " [BEST SELLER]" : ""}`
+      )
+      .join("\n")}
 
 ## Your Instructions:
 1. Be helpful, professional, and friendly in all interactions.

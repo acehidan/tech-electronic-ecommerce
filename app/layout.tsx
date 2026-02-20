@@ -11,9 +11,9 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "OTAS-store",
+  title: "MediCare Store",
   description:
-    "Shop the latest construction tool at unbeatable prices in Myanmar Kyat (MMK). Free shipping on orders over 210,000 MMK.",
+    "Shop authentic medicines and healthcare essentials at unbeatable prices in Myanmar Kyat (MMK). Free delivery on orders over 50,000 MMK.",
   generator: "otas",
   icons: {
     icon: [

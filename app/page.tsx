@@ -6,6 +6,7 @@ import { CategoryCard } from "@/components/category-card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, Shield, Truck } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { products, categories } from "@/lib/data";
 import { useLanguage } from "@/lib/language-context";
 
@@ -23,24 +24,24 @@ export default function HomePage() {
       <section className="relative bg-gradient-to-br from-primary via-primary/90 to-accent text-primary-foreground">
         <div className="container mx-auto px-4 py-20 md:py-32">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance leading-15 md:leading-30">
+            <h1 className="text-3xl md:text-6xl font-bold mb-6 text-balance leading-15 md:leading-30">
               {t("heroTitle")}
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/90 mb-8 text-pretty">
+            {/* <p className="text-lg md:text-xl text-primary-foreground/90 mb-8 text-pretty">
               {t("heroSubtitle")}
-            </p>
+            </p> */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/products">
                 <Button
-                  size="lg"
+                  size="4xl"
                   variant="secondary"
-                  className="text-base font-semibold"
+                  className="text-xl font-semibold"
                 >
-                  {t("shopNewArrivals")}
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  အော်ဒါတင်ရန်
+                  <ArrowRight className="ml-2" />
                 </Button>
               </Link>
-              <Link href="/categories">
+              {/* <Link href="/categories">
                 <Button
                   size="lg"
                   variant="outline"
@@ -48,14 +49,14 @@ export default function HomePage() {
                 >
                   {t("viewAllCategories")}
                 </Button>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
       </section>
 
       {/* Features */}
-      <section className="border-b border-border bg-muted/30">
+      {/* <section className="border-b border-border bg-muted/30">
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="flex items-center gap-4">
@@ -99,20 +100,20 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Categories */}
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-3xl font-bold text-foreground mb-2">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
                 {t("shopByCategory")}
               </h2>
-              <p className="text-muted-foreground">{t("shopByCategoryDesc")}</p>
+              {/* <p className="text-muted-foreground">{t("shopByCategoryDesc")}</p> */}
             </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {categories.map((category) => (
               <CategoryCard
                 key={category.slug}
@@ -129,10 +130,10 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-3xl font-bold text-foreground mb-2">
+              <h2 className="text-lg md:text-3xl font-bold text-foreground mb-2">
                 {t("newArrivals")}
               </h2>
-              <p className="text-muted-foreground">{t("newArrivalsDesc")}</p>
+              <p className="hidden md:block text-sm md:text-base text-muted-foreground">{t("newArrivalsDesc")}</p>
             </div>
             <Link href="/products">
               <Button variant="outline">
@@ -141,7 +142,7 @@ export default function HomePage() {
               </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             {newArrivals.map((product) => (
               <ProductCard
                 key={product.id}
@@ -162,10 +163,10 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-3xl font-bold text-foreground mb-2">
+              <h2 className="text-lg md:text-3xl font-bold text-foreground mb-2">
                 {t("bestSellers")}
               </h2>
-              <p className="text-muted-foreground">{t("bestSellersDesc")}</p>
+              <p className="hidden md:block text-sm md:text-base text-muted-foreground">{t("bestSellersDesc")}</p>
             </div>
             <Link href="/products">
               <Button variant="outline">
@@ -174,7 +175,7 @@ export default function HomePage() {
               </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             {bestSellers.map((product) => (
               <ProductCard
                 key={product.id}
@@ -218,9 +219,9 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="h-8 w-8 rounded-lg bg-primary" />
+                <Image src="/medicine-logo.svg" alt="Logo" width={32} height={32} />
                 <span className="text-lg font-bold text-foreground">
-                  TechStore
+                  MediCare Store
                 </span>
               </div>
               <p className="text-sm text-muted-foreground">{t("footerDesc")}</p>
@@ -287,7 +288,7 @@ export default function HomePage() {
                 </li>
               </ul>
             </div>
-            <div>
+            {/* <div>
               <h4 className="font-semibold text-foreground mb-4">
                 {t("account")}
               </h4>
@@ -317,10 +318,10 @@ export default function HomePage() {
                   </Link>
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
           <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2025 TechStore. {t("rightsReserved")}</p>
+            <p>&copy; 2025 MediCare Store. {t("rightsReserved")}</p>
           </div>
         </div>
       </footer>

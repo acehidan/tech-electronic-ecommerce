@@ -28,14 +28,14 @@ export function Navigation() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
-              <Image src="/otas.png" alt="Logo" width={32} height={32} />
+              <Image src="/medicine-logo.svg" alt="Logo" width={32} height={32} />
               <span className="text-xl font-bold text-foreground">
-                OTAS Store
+                MediCare Store
               </span>
             </Link>
 
             {/* Search Bar - Desktop */}
-            <div className="hidden md:flex flex-1 max-w-xl mx-8">
+            {/* <div className="hidden md:flex flex-1 max-w-xl mx-8">
               <div className="relative w-full">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -44,7 +44,7 @@ export function Navigation() {
                   className="w-full pl-10"
                 />
               </div>
-            </div>
+            </div> */}
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-6">
@@ -60,17 +60,17 @@ export function Navigation() {
               >
                 {t("newProducts")}
               </Link>
-              <Link
+              {/* <Link
                 href="/account"
                 className="text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
                 {t("account")}
-              </Link>
+              </Link> */}
             </nav>
 
             {/* Icons */}
             <div className="flex items-center space-x-4">
-              <DropdownMenu>
+              {/* <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon">
                     <Globe className="h-5 w-5" />
@@ -84,46 +84,47 @@ export function Navigation() {
                     English
                   </DropdownMenuItem>
                 </DropdownMenuContent>
-              </DropdownMenu>
+              </DropdownMenu> */}
 
-              <Button variant="ghost" size="icon" className="hidden md:flex">
+              {/* <Button variant="ghost" size="icon" className="hidden md:flex">
                 <User className="h-5 w-5" />
-              </Button>
+              </Button> */}
               <Button
-                variant="ghost"
-                size="icon"
-                className="relative"
+                variant="default"
+                size="sm"
+                className="relative gap-2 px-4"
                 onClick={openCart}
               >
-                <ShoppingCart className="h-5 w-5" />
+                <ShoppingCart className="h-4 w-4" />
+                <span className="font-semibold">အော်ဒါတင်ရန်</span>
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-xs font-medium text-primary-foreground flex items-center justify-center">
+                  <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-destructive text-[10px] font-bold text-destructive-foreground border-2 border-background flex items-center justify-center">
                     {cartCount}
                   </span>
                 )}
               </Button>
-              <Button
+              {/* <Button
                 variant="ghost"
                 size="icon"
                 className="md:hidden"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
                 <Menu className="h-5 w-5" />
-              </Button>
+              </Button> */}
             </div>
           </div>
 
           {/* Mobile Menu */}
           {mobileMenuOpen && (
             <div className="md:hidden py-4 space-y-4">
-              <div className="relative w-full">
+              {/* <div className="relative w-full">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   type="search"
                   placeholder="Search for products..."
                   className="w-full pl-10"
                 />
-              </div>
+              </div> */}
               <nav className="flex flex-col space-y-3">
                 <Link
                   href="/categories"
@@ -137,12 +138,12 @@ export function Navigation() {
                 >
                   New Products
                 </Link>
-                <Link
+                {/* <Link
                   href="/account"
                   className="text-sm font-medium text-foreground hover:text-primary transition-colors"
                 >
                   Account
-                </Link>
+                </Link> */}
               </nav>
             </div>
           )}

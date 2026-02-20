@@ -21,11 +21,11 @@ export function CategoryCard({ name, icon, count, slug }: CategoryCardProps) {
               <span className="text-3xl">{icon}</span>
             </div>
           </div>
-          <h3 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+          <h3 className="text-sm md:text-baseq font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
             {name}
           </h3>
           <p className="text-sm text-muted-foreground">
-            {count} {t("products")}
+            {/* {count} */}
           </p>
         </CardContent>
       </Card>
