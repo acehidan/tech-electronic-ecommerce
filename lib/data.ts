@@ -1,3 +1,37 @@
+export const storeInfo = {
+  name: "Tech Electronic Tools",
+  description:
+    "Your trusted source for quality hand tools, power tools, and equipment",
+  location: {
+    address: "No. 123, Bogyoke Aung San Road",
+    city: "Yangon",
+    township: "Pabedan Township",
+    country: "Myanmar",
+    mapUrl: "https://maps.google.com/?q=Tech+Electronic+Tools+Yangon",
+  },
+  hours: {
+    weekdays: "9:00 AM - 6:00 PM",
+    saturday: "9:00 AM - 5:00 PM",
+    sunday: "Closed",
+  },
+  contact: {
+    phone: "+95 9 123 456 789",
+    email: "info@techelectronic.com",
+    facebook: "facebook.com/techelectronic",
+    viber: "+95 9 123 456 789",
+  },
+  policies: {
+    shipping:
+      "Free delivery for orders above 100,000 MMK within Yangon. Delivery fee of 3,000 MMK for orders below this amount. Nationwide shipping available with rates based on location.",
+    returns:
+      "7-day return policy for unused items in original packaging. Defective products can be exchanged within 30 days.",
+    warranty:
+      "All power tools come with a 1-year manufacturer warranty. Hand tools have a 6-month warranty against manufacturing defects.",
+    payment:
+      "We accept Cash on Delivery (COD), KBZ Pay, Wave Pay, and bank transfers (KBZ, CB, AYA).",
+  },
+};
+
 export const categories = [
   { name: "Hand Tools", icon: "🔨", count: 12, slug: "hand-tools" },
   { name: "Power Tools", icon: "🔌", count: 8, slug: "power-tools" },
