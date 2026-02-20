@@ -96,7 +96,7 @@ export function Navigation() {
                 onClick={openCart}
               >
                 <ShoppingCart className="h-4 w-4" />
-                <span className="font-semibold">အော်ဒါတင်ရန်</span>
+                <span className="font-semibold">စျေးဝယ်ခြင်း</span>
                 {cartCount > 0 && (
                   <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-destructive text-[10px] font-bold text-destructive-foreground border-2 border-background flex items-center justify-center">
                     {cartCount}
