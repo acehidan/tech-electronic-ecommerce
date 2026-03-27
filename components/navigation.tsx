@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingCart, User, Search, Menu, Globe } from "lucide-react";
+import { ShoppingCart, User, Search, Menu, Globe, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -28,9 +28,9 @@ export function Navigation() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
-              <Image src="/medicine-logo.svg" alt="Logo" width={32} height={32} />
+              <ShoppingBag className="h-8 w-8 text-primary" />
               <span className="text-xl font-bold text-foreground">
-                MediCare Store
+                StyleHub Myanmar
               </span>
             </Link>
 

@@ -4,7 +4,7 @@ import { Navigation } from "@/components/navigation";
 import { ProductCard } from "@/components/product-card";
 import { CategoryCard } from "@/components/category-card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Zap, Shield, Truck } from "lucide-react";
+import { ArrowRight, Zap, Shield, Truck, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { products, categories } from "@/lib/data";
@@ -219,9 +219,9 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <Image src="/medicine-logo.svg" alt="Logo" width={32} height={32} />
+                <ShoppingBag className="h-8 w-8 text-primary" />
                 <span className="text-lg font-bold text-foreground">
-                  MediCare Store
+                  StyleHub Myanmar
                 </span>
               </div>
               <p className="text-sm text-muted-foreground">{t("footerDesc")}</p>
@@ -321,7 +321,7 @@ export default function HomePage() {
             </div> */}
           </div>
           <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2025 MediCare Store. {t("rightsReserved")}</p>
+            <p>&copy; 2025 StyleHub Myanmar. {t("rightsReserved")}</p>
           </div>
         </div>
       </footer>

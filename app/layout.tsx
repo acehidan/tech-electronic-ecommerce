@@ -11,9 +11,9 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MediCare Store",
+  title: "StyleHub Myanmar",
   description:
-    "Shop authentic medicines and healthcare essentials at unbeatable prices in Myanmar Kyat (MMK). Free delivery on orders over 50,000 MMK.",
+    "Shop the latest fashion trends and clothing at unbeatable prices in Myanmar Kyat (MMK). Free delivery on orders over 50,000 MMK.",
   generator: "otas",
   icons: {
     icon: [

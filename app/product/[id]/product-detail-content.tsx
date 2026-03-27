@@ -34,6 +34,8 @@ export function ProductDetailContent({
 }) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState(product.sizes?.[0] || "");
+  const [selectedColor, setSelectedColor] = useState(product.colors?.[0] || "");
   const { addItem } = useCart();
   const { t, language } = useLanguage();
 
@@ -108,55 +110,69 @@ export function ProductDetailContent({
                 : product.name}
             </h1>
 
-            {/* Rating */}
-            {/* <div className="flex items-center gap-4 mb-6">
-              <div className="flex items-center gap-1">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`h-5 w-5 ${i < Math.floor(product.rating)
-                      ? "fill-accent text-accent"
-                      : "fill-muted text-muted"
-                      }`}
-                  />
-                ))}
-              </div>
-              <span className="text-muted-foreground">
-                ({product.reviews} {t("reviews")})
-              </span>
-            </div> */}
-
             {/* Price */}
             <div className="flex items-center gap-4 mb-6">
               <span className="text-4xl font-bold text-primary">
                 {formatPrice(product.price)}
               </span>
-              {/* {product.originalPrice && (
-                <>
-                  <span className="text-2xl text-muted-foreground line-through">
-                    {formatPrice(product.originalPrice)}
-                  </span>
-                  <span className="px-3 py-1 bg-destructive text-destructive-foreground rounded-md font-semibold">
-                    {t("save")}{" "}
-                    {Math.round(
-                      ((product.originalPrice - product.price) /
-                        product.originalPrice) *
-                      100
-                    )}
-                    %
-                  </span>
-                </>
-              )} */}
             </div>
 
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Ensure your health with the{" "}
+              Elevate your style with the{" "}
               {language === "my" && product.name_my
                 ? product.name_my
                 : product.name}
-              . Carefully selected for safety and effectiveness, this product
-              combines healthcare expertise with premium quality standards.
+              . Carefully designed for comfort and fashion, this item
+              combines modern trends with premium quality materials.
             </p>
+
+            {/* Color Selection */}
+            {product.colors && product.colors.length > 0 && (
+              <div className="mb-6">
+                <label className="text-sm font-semibold text-foreground mb-3 block">
+                  Color
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {product.colors.map((color: string) => (
+                    <button
+                      key={color}
+                      onClick={() => setSelectedColor(color)}
+                      className={`px-4 py-2 border rounded-md text-sm font-medium transition-colors ${
+                        selectedColor === color
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border hover:border-primary/50 text-foreground"
+                      }`}
+                    >
+                      {color}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Size Selection */}
+            {product.sizes && product.sizes.length > 0 && (
+              <div className="mb-6">
+                <label className="text-sm font-semibold text-foreground mb-3 block">
+                  Size
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {product.sizes.map((size: string) => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      className={`px-4 py-2 border rounded-md text-sm font-medium transition-colors min-w-[3rem] ${
+                        selectedSize === size
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border hover:border-primary/50 text-foreground"
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Quantity */}
             <div className="mb-6">
@@ -194,61 +210,7 @@ export function ProductDetailContent({
                 <ShoppingCart className="mr-2 h-5 w-5" />
                 {t("addToCart")}
               </Button>
-              {/* <Button size="lg" variant="outline">
-                <Heart className="mr-2 h-5 w-5" />
-                {t("wishlist")}
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="sm:w-auto bg-transparent"
-              >
-                <Share2 className="h-5 w-5" />
-              </Button> */}
             </div>
-
-            {/* Features */}
-            {/* <div className="space-y-4 pt-6 border-t border-border">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Truck className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <p className="font-semibold text-foreground">
-                    {t("freeShipping")}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {t("freeShippingDesc")}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Shield className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <p className="font-semibold text-foreground">
-                    {t("warranty")}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {t("warrantyDesc")}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <RefreshCw className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <p className="font-semibold text-foreground">
-                    {t("returns30")}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {t("returnsDesc")}
-                  </p>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
 
@@ -284,24 +246,24 @@ export function ProductDetailContent({
                 {language === "my" && product.name_my
                   ? product.name_my
                   : product.name}{" "}
-                represents the highest standard of {categoryName} care.
-                Meticulously developed to provide pharmaceutical-grade support,
-                it meets the rigorous safety requirements of healthcare essentials.
+                represents the highest standard of {categoryName} fashion.
+                Meticulously developed to provide perfect fit and comfort,
+                it meets the rigorous quality requirements of modern apparel.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Whether for daily wellness or specific health needs,
-                this product delivers reliable results. Its packaging ensures
-                maximum hygiene and freshness.
+                Whether for daily wear or special occasions,
+                this piece delivers reliable style. Its material ensures
+                maximum durability and a premium feel.
               </p>
               <h4 className="text-lg font-semibold text-foreground mb-3 mt-6">
                 {t("keyFeatures")}
               </h4>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                <li>Quality-tested for safety and effectiveness</li>
-                <li>Clinical grade materials and ingredients</li>
-                <li>Clear dosage instructions and easy storage</li>
-                <li>Hygienic and secure packaging</li>
-                <li>Authentic healthcare product guarantee</li>
+                <li>Quality-tested for durability and comfort</li>
+                <li>Premium grade materials and fabrics</li>
+                <li>Clear washing instructions and easy care</li>
+                <li>Trendy and versatile design</li>
+                <li>Authentic style guarantee</li>
               </ul>
             </div>
           </TabsContent>
@@ -315,7 +277,7 @@ export function ProductDetailContent({
                   <div className="flex justify-between py-2 border-b border-border">
                     <dt className="text-muted-foreground">{t("model")}</dt>
                     <dd className="font-medium text-foreground">
-                      {product.id.padStart(4, "0")} - {categoryName} Series
+                      {product.id.padStart(4, "0")} - {categoryName} Collection
                     </dd>
                   </div>
                   <div className="flex justify-between py-2 border-b border-border">
@@ -326,7 +288,7 @@ export function ProductDetailContent({
                   </div>
                   <div className="flex justify-between py-2 border-b border-border">
                     <dt className="text-muted-foreground">{t("warranty")}</dt>
-                    <dd className="font-medium text-foreground">2 Years</dd>
+                    <dd className="font-medium text-foreground">Authenticity Guaranteed</dd>
                   </div>
                 </dl>
               </div>
@@ -355,8 +317,8 @@ export function ProductDetailContent({
                     </span>
                   </div>
                   <p className="text-muted-foreground leading-relaxed">
-                    Great product! Exactly as described and shipping was fast.
-                    Would definitely recommend to anyone looking for a quality{" "}
+                    Great quality! Exactly as described and shipping was fast.
+                    Would definitely recommend to anyone looking for stylish{" "}
                     {categoryName.toLowerCase()}.
                   </p>
                 </div>
