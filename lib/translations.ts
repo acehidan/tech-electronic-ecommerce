@@ -40,7 +40,7 @@ export const translations = {
     subscribe: "Subscribe",
 
     // Footer
-    footerDesc: "StyleHub Myanmar - Providing trendy and quality clothing for your family.",
+    footerDesc: "Auto Shop - Providing trendy and quality clothing for your family.",
     shop: "Fashion Shop",
     support: "Customer Support",
     contactUs: "Contact Us",
@@ -164,7 +164,7 @@ export const translations = {
 
     // Footer
     footerDesc:
-      "StyleHub Myanmar - သင့်မိသားစုအတွက် ခေတ်မီပြီး အရည်အသွေးမြင့် အဝတ်အထည်များ။",
+      "Auto Shop - သင့်မိသားစုအတွက် ခေတ်မီပြီး အရည်အသွေးမြင့် အဝတ်အထည်များ။",
     shop: "ဖက်ရှင်ဆိုင်",
     support: "အကူအညီ",
     contactUs: "ဆက်သွယ်ရန်",

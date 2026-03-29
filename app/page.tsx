@@ -6,7 +6,6 @@ import { CategoryCard } from "@/components/category-card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, Shield, Truck, ShoppingBag } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { products, categories } from "@/lib/data";
 import { useLanguage } from "@/lib/language-context";
 
@@ -118,7 +117,7 @@ export default function HomePage() {
               <CategoryCard
                 key={category.slug}
                 {...category}
-                name={t(`cat_${category.slug.replace("-", "_")}` as any)}
+                name={t(`${category.slug}` as any)}
               />
             ))}
           </div>
@@ -221,7 +220,7 @@ export default function HomePage() {
               <div className="flex items-center space-x-2 mb-4">
                 <ShoppingBag className="h-8 w-8 text-primary" />
                 <span className="text-lg font-bold text-foreground">
-                  StyleHub Myanmar
+                  Auto Shop
                 </span>
               </div>
               <p className="text-sm text-muted-foreground">{t("footerDesc")}</p>
@@ -321,7 +320,7 @@ export default function HomePage() {
             </div> */}
           </div>
           <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2025 StyleHub Myanmar. {t("rightsReserved")}</p>
+            <p>&copy; 2025 Auto Shop. {t("rightsReserved")}</p>
           </div>
         </div>
       </footer>

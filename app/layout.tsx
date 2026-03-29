@@ -5,13 +5,13 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
 import { LanguageProvider } from "@/lib/language-context";
-import { Chat } from "@/components/Chat";
+
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "StyleHub Myanmar",
+  title: "Auto Shop",
   description:
     "Shop the latest fashion trends and clothing at unbeatable prices in Myanmar Kyat (MMK). Free delivery on orders over 50,000 MMK.",
   generator: "otas",
@@ -44,7 +44,6 @@ export default function RootLayout({
       <body className={`font-sans antialiased`}>
         <LanguageProvider>
           <CartProvider>{children}</CartProvider>
-          {/* <Chat /> */}
           <Analytics />
         </LanguageProvider>
       </body>
