@@ -117,7 +117,7 @@ export default function HomePage() {
               <CategoryCard
                 key={category.slug}
                 {...category}
-                name={t(`${category.slug}` as any)}
+                name={category.name_my}
               />
             ))}
           </div>

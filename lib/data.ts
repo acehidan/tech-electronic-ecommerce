@@ -33,11 +33,11 @@ export const storeInfo = {
 };
 
 export const categories = [
-  { name: "Batik (ပါတိတ်)", icon: "👗", count: 4, slug: "ပါတိတ်" },
-  { name: "Cotton T-shirts (ချည်သား)", icon: "👕", count: 6, slug: "ချည်သား" },
-  { name: "Dresses (ဂါဝန်)", icon: "💃", count: 5, slug: "ဂါဝန်" },
-  { name: "Handbags (လက်ကိုင်အိတ်)", icon: "👜", count: 3, slug: "လက်ကိုင်အိတ်" },
-  { name: "Accessories", icon: "🕶️", count: 2, slug: "accessories" },
+  { name: "Batik (ပါတိတ်)", icon: "👗", count: 4, slug: "batik", name_my: "ပါတိတ်" },
+  { name: "Cotton T-shirts (ချည်သား)", icon: "👕", count: 6, slug: "cotton-tshirts", name_my: "ချည်သား" },
+  { name: "Dresses (ဂါဝန်)", icon: "💃", count: 5, slug: "dresses", name_my: "ဂါဝန်" },
+  { name: "Handbags (လက်ကိုင်အိတ်)", icon: "👜", count: 3, slug: "handbags", name_my: "လက်ကိုင်အိတ်" },
+  { name: "Accessories", icon: "🕶️", count: 2, slug: "accessories", name_my: "Accessories" },
 ];
 
 export const products = [

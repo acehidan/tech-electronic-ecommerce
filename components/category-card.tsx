@@ -10,6 +10,7 @@ interface CategoryCardProps {
 }
 
 export function CategoryCard({ name, icon, count, slug }: CategoryCardProps) {
+  console.log(name);
   const { t } = useLanguage();
 
   return (
