@@ -7,14 +7,26 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { Suspense, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { products } from "@/lib/data";
 import { useLanguage } from "@/lib/language-context";
 import { formatPrice } from "@/lib/format-price";
 
-export default function ProductsPage() {
+function ProductsContent() {
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get("q") || "";
+  
   const { t, language } = useLanguage();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [showSuggestions, setShowSuggestions] = useState(false);
+
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (q !== null) {
+      setSearchQuery(q);
+    }
+  }, [searchParams]);
 
   const filteredProducts = products.filter((product) => {
     const nameMatch = product.name
@@ -111,7 +123,7 @@ export default function ProductsPage() {
 
         {/* Products Grid */}
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
             {filteredProducts.map((product) => (
               <ProductCard
                 key={product.id}
@@ -140,5 +152,13 @@ export default function ProductsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background" />}>
+      <ProductsContent />
+    </Suspense>
   );
 }

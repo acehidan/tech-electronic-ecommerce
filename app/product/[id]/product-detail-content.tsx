@@ -118,12 +118,7 @@ export function ProductDetailContent({
             </div>
 
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Elevate your style with the{" "}
-              {language === "my" && product.name_my
-                ? product.name_my
-                : product.name}
-              . Carefully designed for comfort and fashion, this item
-              combines modern trends with premium quality materials.
+              {t("productDetailStory")}
             </p>
 
             {/* Color Selection */}
@@ -242,28 +237,20 @@ export function ProductDetailContent({
                 {t("productDescription")}
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                The{" "}
-                {language === "my" && product.name_my
-                  ? product.name_my
-                  : product.name}{" "}
-                represents the highest standard of {categoryName} fashion.
-                Meticulously developed to provide perfect fit and comfort,
-                it meets the rigorous quality requirements of modern apparel.
+                {t("productDetailStory")}
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Whether for daily wear or special occasions,
-                this piece delivers reliable style. Its material ensures
-                maximum durability and a premium feel.
+                {t("productDetailMaterial")}
               </p>
               <h4 className="text-lg font-semibold text-foreground mb-3 mt-6">
                 {t("keyFeatures")}
               </h4>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                <li>Quality-tested for durability and comfort</li>
-                <li>Premium grade materials and fabrics</li>
-                <li>Clear washing instructions and easy care</li>
-                <li>Trendy and versatile design</li>
-                <li>Authentic style guarantee</li>
+                <li>{t("featureQuality")}</li>
+                <li>{t("featurePremium")}</li>
+                <li>{t("featureWashing")}</li>
+                <li>{t("featureVersatile")}</li>
+                <li>{t("featureAuthentic")}</li>
               </ul>
             </div>
           </TabsContent>

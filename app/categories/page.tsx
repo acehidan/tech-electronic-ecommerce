@@ -22,7 +22,6 @@ export default function CategoriesPage() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {categories.map((category) => (
-            console.log(category.name),
             <CategoryCard
               key={category.slug}
               {...category}

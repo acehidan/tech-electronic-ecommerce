@@ -4,7 +4,7 @@ import { Navigation } from "@/components/navigation";
 import { ProductCard } from "@/components/product-card";
 import { CategoryCard } from "@/components/category-card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Zap, Shield, Truck, ShoppingBag } from "lucide-react";
+import { ArrowRight, Zap, Shield, Truck, ShoppingBag, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { products, categories } from "@/lib/data";
 import { useLanguage } from "@/lib/language-context";
@@ -20,35 +20,29 @@ export default function HomePage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary via-primary/90 to-accent text-primary-foreground">
-        <div className="container mx-auto px-4 py-20 md:py-32">
-          <div className="text-center">
-            <h1 className="text-3xl md:text-6xl font-bold mb-6 text-balance leading-15 md:leading-30">
-              {t("heroTitle")}
-            </h1>
-            {/* <p className="text-lg md:text-xl text-primary-foreground/90 mb-8 text-pretty">
-              {t("heroSubtitle")}
-            </p> */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/products">
-                <Button
-                  size="4xl"
-                  variant="secondary"
-                  className="text-xl font-semibold"
+      <section className="bg-gradient-to-r from-[#0051a8] to-[#007bff] relative overflow-hidden">
+        <div className="container mx-auto py-8 md:py-20  ">
+          <div className="grid grid-cols-7 gap-2 items-center">
+            <div className="text-white space-y-6 px-4 col-span-4">
+              <h1 className="text-[16px] md:text-xl lg:text-4xl font-bold leading-[1.8] lg:leading-[1.5]">
+                နောက်ဆုံးပေါ် ဖက်ရှင်ဒီဇိုင်းများနှင့် အဝတ်အထည်များကို ဝယ်ယူလိုက်ပါ
+              </h1>
+              <Link href="/products" className="inline-block">
+                <button
+                  className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center gap-2 text-[10px] md:text-base cursor-pointer"
                 >
-                  အော်ဒါတင်ရန်
-                  <ArrowRight className="ml-2" />
-                </Button>
+                  အော်ဒါတင်မယ်
+                  <ChevronRight className="w-5 h-5" />
+                </button>
               </Link>
-              {/* <Link href="/categories">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="text-base font-semibold bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/20 hover:text-primary-foreground"
-                >
-                  {t("viewAllCategories")}
-                </Button>
-              </Link> */}
+            </div>
+
+            <div className="relative h-48 md:h-80 col-span-3">
+              <img
+                src="/herobanner.png"
+                alt="Medical Products"
+                className="absolute right-0 top-0 w-full h-full object-cover rounded-l-lg shadow-lg"
+              />
             </div>
           </div>
         </div>
@@ -102,14 +96,13 @@ export default function HomePage() {
       </section> */}
 
       {/* Categories */}
-      <section className="py-16 md:py-20">
+      {/* <section className="py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
                 {t("shopByCategory")}
               </h2>
-              {/* <p className="text-muted-foreground">{t("shopByCategoryDesc")}</p> */}
             </div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
@@ -122,26 +115,31 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* New Arrivals */}
       <section className="py-16 md:py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-lg md:text-3xl font-bold text-foreground mb-2">
-                {t("newArrivals")}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex flex-col gap-1.5">
+              <h2 className="text-[22px] sm:text-2xl md:text-3xl font-bold text-[#0051a8] leading-none mb-1">
+                ဒီဇိုင်းသစ်များ
               </h2>
-              <p className="hidden md:block text-sm md:text-base text-muted-foreground">{t("newArrivalsDesc")}</p>
+              <p className="text-[13px] sm:text-sm md:text-base text-foreground/90 font-medium leading-[1.4]">
+                နောက်ဆုံးရောက်ရှိလာသော<br />
+                ဖက်ရှင်အဝတ်အထည်များ
+              </p>
             </div>
-            <Link href="/products">
-              <Button variant="outline">
-                {t("viewAll")}
-                <ArrowRight className="ml-2 h-4 w-4" />
+            <Link href="/products" className="shrink-0 ml-2">
+              <Button
+                variant="outline"
+                className="rounded-[14px] border border-[#007bff] text-[#007bff] hover:bg-blue-50/50 hover:text-[#0069d9] bg-white px-5 sm:px-6 py-4 h-auto text-[15px] sm:text-base font-bold shadow-none"
+              >
+                ကြည့်မယ်
               </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {newArrivals.map((product) => (
               <ProductCard
                 key={product.id}
@@ -160,21 +158,25 @@ export default function HomePage() {
       {/* Best Sellers */}
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-lg md:text-3xl font-bold text-foreground mb-2">
-                {t("bestSellers")}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex flex-col gap-1.5">
+              <h2 className="w-[200px] sm:w-full text-[22px] sm:text-2xl md:text-3xl font-bold text-[#0051a8] leading-[2] mb-1">
+                လူကြိုက်အများဆုံး ဒီဇိုင်းများ
               </h2>
-              <p className="hidden md:block text-sm md:text-base text-muted-foreground">{t("bestSellersDesc")}</p>
+              <p className="text-[13px] sm:text-sm md:text-base text-foreground/90 font-medium leading-[1.4]">
+                လူသုံးအများဆုံး ဖက်ရှင်များ
+              </p>
             </div>
-            <Link href="/products">
-              <Button variant="outline">
-                {t("viewAll")}
-                <ArrowRight className="ml-2 h-4 w-4" />
+            <Link href="/products" className="shrink-0 ml-2">
+              <Button
+                variant="outline"
+                className="rounded-[14px] border border-[#007bff] text-[#007bff] hover:bg-blue-50/50 hover:text-[#0069d9] bg-white px-5 sm:px-6 py-4 h-auto text-[15px] sm:text-base font-bold shadow-none"
+              >
+                ကြည့်မယ်
               </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {bestSellers.map((product) => (
               <ProductCard
                 key={product.id}

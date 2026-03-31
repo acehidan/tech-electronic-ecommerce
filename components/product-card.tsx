@@ -2,10 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Star, ShoppingCart, Minus, Plus } from "lucide-react";
+import { ShoppingBag, Shirt } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { formatPrice } from "@/lib/format-price";
 import { useCart } from "@/lib/cart-context";
 
 interface ProductCardProps {
@@ -27,95 +26,57 @@ export function ProductCard({
   reviews,
   image,
 }: ProductCardProps) {
-  const { addItem, updateQuantity, items } = useCart();
-  const cartItem = items.find((item) => item.productId === id);
-  const quantity = cartItem ? cartItem.quantity : 0;
-
-  const discount = originalPrice
-    ? Math.round(((originalPrice - price) / originalPrice) * 100)
-    : 0;
+  const { addItem } = useCart();
 
   return (
-    <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300">
+    <Card className="group overflow-hidden hover:shadow-md transition-all duration-300 rounded-2xl border border-gray-100 bg-white shadow-sm">
       <Link href={`/product/${id}`}>
-        <div className="relative aspect-square overflow-hidden bg-secondary">
+        <div className="relative aspect-[4/3] overflow-hidden bg-secondary w-full">
           <Image
             src={image || "/placeholder.svg"}
             alt={name}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          {/* {discount > 0 && (
-            <div className="absolute top-3 left-3 bg-destructive text-destructive-foreground px-2 py-1 rounded-md text-xs font-semibold">
-              -{discount}%
-            </div>
-          )} */}
         </div>
       </Link>
-      <CardContent className="p-4">
-        <Link href={`/product/${id}`}>
-          <h3 className="font-semibold h-10 text-sm text-foreground line-clamp-2 mb-2 group-hover:text-primary transition-colors">
-            {name}
-          </h3>
-        </Link>
-        {/* <div className="flex items-center gap-1 mb-2">
-          <div className="flex items-center">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star
-                key={i}
-                className={`h-3 w-3 ${
-                  i < Math.floor(rating)
-                    ? "fill-accent text-accent"
-                    : "fill-muted text-muted"
-                }`}
-              />
-            ))}
+      <CardContent className="p-4 pt-5 pb-5 flex flex-col gap-5">
+        <div className="flex justify-between items-start gap-4">
+          <Link href={`/product/${id}`} className="flex-1">
+            <h3 className="font-bold text-[15px] sm:text-base text-foreground leading-snug hover:text-[#007bff] transition-colors line-clamp-2">
+              {name}
+            </h3>
+          </Link>
+          <div className="flex flex-col items-end justify-start leading-none shrink-0">
+            <span className="text-xl sm:text-2xl font-black text-[#007bff]">
+              {price.toLocaleString("en-US")}
+            </span>
+            <span className="text-[10px] sm:text-xs font-bold text-[#007bff] mt-1 uppercase tracking-wider">
+              MMK
+            </span>
           </div>
-          <span className="text-xs text-muted-foreground">({reviews})</span>
-        </div> */}
-        <div className="flex flex-col gap-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-lg font-bold text-primary">
-                {formatPrice(price)}
-              </span>
-              {/* {originalPrice && (
-                <span className="text-sm text-muted-foreground line-through">
-                  {formatPrice(originalPrice)}
-                </span>
-              )} */}
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="flex w-full items-center justify-between bg-primary/10 rounded-lg overflow-hidden border border-primary/20">
-              <Button
-                size="icon"
-                variant="ghost"
-                className="h-8 w-8 text-primary hover:bg-primary hover:text-primary-foreground rounded-none"
-                onClick={() => updateQuantity(id, quantity - 1)}
-                disabled={quantity === 0}
-              >
-                <Minus className="h-4 w-4" />
-              </Button>
-              <span className="w-8 text-center text-sm font-bold text-primary">
-                {quantity}
-              </span>
-              <Button
-                size="icon"
-                variant="ghost"
-                className="h-8 w-8 text-primary hover:bg-primary hover:text-primary-foreground rounded-none"
-                onClick={() => {
-                  if (quantity === 0) {
-                    addItem(id, 1, false);
-                  } else {
-                    updateQuantity(id, quantity + 1);
-                  }
-                }}
-              >
-                <Plus className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+        </div>
+        
+        <div className="flex items-center gap-2 w-full">
+          <Button
+            className="flex-1 bg-[#007bff] hover:bg-[#0069d9] text-white rounded-xl h-[42px] sm:h-11 flex items-center justify-center gap-1 sm:gap-1.5 text-[0.8rem] sm:text-sm font-bold shadow-none border border-[#007bff] hover:border-[#0069d9]"
+            onClick={(e) => {
+              e.preventDefault();
+              addItem(id, 1, false);
+            }}
+          >
+            အထည် ယူမယ်
+            <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+          </Button>
+          <Link href={`/product/${id}`} className="flex-1 flex">
+            <Button
+              variant="outline"
+              className="w-full border border-[#007bff] text-[#007bff] hover:text-[#0069d9] hover:bg-blue-50/50 rounded-xl h-[42px] sm:h-11 flex items-center justify-center gap-1 sm:gap-1.5 text-[0.8rem] sm:text-sm font-bold bg-white"
+            >
+              အထည်ကြည့်မယ်
+              <Shirt className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </Button>
+          </Link>
         </div>
       </CardContent>
     </Card>
