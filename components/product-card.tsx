@@ -56,7 +56,7 @@ export function ProductCard({
             </span>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-2 w-full">
           <Button
             className="flex-1 bg-[#007bff] hover:bg-[#0069d9] text-white rounded-xl h-[42px] sm:h-11 flex items-center justify-center gap-1 sm:gap-1.5 text-[0.8rem] sm:text-sm font-bold shadow-none border border-[#007bff] hover:border-[#0069d9]"
@@ -65,7 +65,7 @@ export function ProductCard({
               addItem(id, 1, false);
             }}
           >
-            အထည် ယူမယ်
+            ယူမယ်
             <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </Button>
           <Link href={`/product/${id}`} className="flex-1 flex">
@@ -73,7 +73,7 @@ export function ProductCard({
               variant="outline"
               className="w-full border border-[#007bff] text-[#007bff] hover:text-[#0069d9] hover:bg-blue-50/50 rounded-xl h-[42px] sm:h-11 flex items-center justify-center gap-1 sm:gap-1.5 text-[0.8rem] sm:text-sm font-bold bg-white"
             >
-              အထည်ကြည့်မယ်
+              ကြည့်မယ်
               <Shirt className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </Button>
           </Link>

@@ -132,11 +132,10 @@ export function ProductDetailContent({
                     <button
                       key={color}
                       onClick={() => setSelectedColor(color)}
-                      className={`px-4 py-2 border rounded-md text-sm font-medium transition-colors ${
-                        selectedColor === color
+                      className={`px-4 py-2 border rounded-md text-sm font-medium transition-colors ${selectedColor === color
                           ? "border-primary bg-primary text-primary-foreground"
                           : "border-border hover:border-primary/50 text-foreground"
-                      }`}
+                        }`}
                     >
                       {color}
                     </button>
@@ -156,11 +155,10 @@ export function ProductDetailContent({
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`px-4 py-2 border rounded-md text-sm font-medium transition-colors min-w-[3rem] ${
-                        selectedSize === size
+                      className={`px-4 py-2 border rounded-md text-sm font-medium transition-colors min-w-[3rem] ${selectedSize === size
                           ? "border-primary bg-primary text-primary-foreground"
                           : "border-border hover:border-primary/50 text-foreground"
-                      }`}
+                        }`}
                     >
                       {size}
                     </button>
@@ -218,7 +216,7 @@ export function ProductDetailContent({
             >
               {t("description")}
             </TabsTrigger>
-            <TabsTrigger
+            {/* <TabsTrigger
               value="specifications"
               className="rounded-none border-b-2 border-transparent data-[state=active]:border-b-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-4 px-0 whitespace-nowrap"
             >
@@ -229,7 +227,7 @@ export function ProductDetailContent({
               className="rounded-none border-b-2 border-transparent data-[state=active]:border-b-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-4 px-0 whitespace-nowrap"
             >
               {t("reviews")} ({product.reviews})
-            </TabsTrigger>
+            </TabsTrigger> */}
           </TabsList>
           <TabsContent value="description" className="mt-6">
             <div className="prose prose-gray max-w-none">

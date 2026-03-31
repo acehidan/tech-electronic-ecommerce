@@ -29,7 +29,7 @@ export default function HomePage() {
               </h1>
               <Link href="/products" className="inline-block">
                 <button
-                  className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center gap-2 text-[10px] md:text-base cursor-pointer"
+                  className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center gap-2 text-[12px] md:text-base cursor-pointer"
                 >
                   အော်ဒါတင်မယ်
                   <ChevronRight className="w-5 h-5" />
