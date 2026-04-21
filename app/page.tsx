@@ -20,16 +20,16 @@ export default function HomePage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-[#0051a8] to-[#007bff] relative overflow-hidden">
+      <section className="bg-gradient-to-r from-[#2216a8] to-[#3a2dbb] relative overflow-hidden">
         <div className="container mx-auto py-8 md:py-20  ">
           <div className="grid grid-cols-7 gap-2 items-center">
             <div className="text-white space-y-6 px-4 col-span-4">
               <h1 className="text-[16px] md:text-xl lg:text-4xl font-bold leading-[1.8] lg:leading-[1.5]">
-                နောက်ဆုံးပေါ် ဖက်ရှင်ဒီဇိုင်းများနှင့် အဝတ်အထည်များကို ဝယ်ယူလိုက်ပါ
+                {t("heroTitle")}
               </h1>
               <Link href="/products" className="inline-block">
                 <button
-                  className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center gap-2 text-[12px] md:text-base cursor-pointer"
+                  className="bg-white text-[#2216a8] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center gap-2 text-[12px] md:text-base cursor-pointer"
                 >
                   အော်ဒါတင်မယ်
                   <ChevronRight className="w-5 h-5" />
@@ -39,8 +39,8 @@ export default function HomePage() {
 
             <div className="relative h-48 md:h-80 col-span-3">
               <img
-                src="/herobanner.png"
-                alt="Medical Products"
+                src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=800"
+                alt="Electronics Banner"
                 className="absolute right-0 top-0 w-full h-full object-cover rounded-l-lg shadow-lg"
               />
             </div>
@@ -122,18 +122,17 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-6">
             <div className="flex flex-col gap-1.5">
-              <h2 className="text-[22px] sm:text-2xl md:text-3xl font-bold text-[#0051a8] leading-none mb-1">
-                ဒီဇိုင်းသစ်များ
+              <h2 className="text-[22px] sm:text-2xl md:text-3xl font-bold text-[#2216a8] leading-none mb-1">
+                {t("newArrivals")}
               </h2>
               <p className="text-[13px] sm:text-sm md:text-base text-foreground/90 font-medium leading-[1.4]">
-                နောက်ဆုံးရောက်ရှိလာသော<br />
-                ဖက်ရှင်အဝတ်အထည်များ
+                {t("newArrivalsDesc")}
               </p>
             </div>
             <Link href="/products" className="shrink-0 ml-2">
               <Button
                 variant="outline"
-                className="rounded-[14px] border border-[#007bff] text-[#007bff] hover:bg-blue-50/50 hover:text-[#0069d9] bg-white px-5 sm:px-6 py-4 h-auto text-[15px] sm:text-base font-bold shadow-none"
+                className="rounded-[14px] border border-[#2216a8] text-[#2216a8] hover:bg-blue-50/50 hover:text-[#2216a8] bg-white px-5 sm:px-6 py-4 h-auto text-[15px] sm:text-base font-bold shadow-none"
               >
                 ကြည့်မယ်
               </Button>
@@ -161,16 +160,16 @@ export default function HomePage() {
           <div className="flex items-center justify-between mb-6">
             <div className="flex flex-col gap-1.5">
               <h2 className="w-[200px] sm:w-full text-[22px] sm:text-2xl md:text-3xl font-bold text-[#0051a8] leading-[2] mb-1">
-                လူကြိုက်အများဆုံး ဒီဇိုင်းများ
+                {t("bestSellers")}
               </h2>
               <p className="text-[13px] sm:text-sm md:text-base text-foreground/90 font-medium leading-[1.4]">
-                လူသုံးအများဆုံး ဖက်ရှင်များ
+                {t("bestSellersDesc")}
               </p>
             </div>
             <Link href="/products" className="shrink-0 ml-2">
               <Button
                 variant="outline"
-                className="rounded-[14px] border border-[#007bff] text-[#007bff] hover:bg-blue-50/50 hover:text-[#0069d9] bg-white px-5 sm:px-6 py-4 h-auto text-[15px] sm:text-base font-bold shadow-none"
+                className="rounded-[14px] border border-[#2216a8] text-[#2216a8] hover:bg-blue-50/50 hover:text-[#2216a8] bg-white px-5 sm:px-6 py-4 h-auto text-[15px] sm:text-base font-bold shadow-none"
               >
                 ကြည့်မယ်
               </Button>
@@ -220,9 +219,9 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <ShoppingBag className="h-8 w-8 text-primary" />
+                <img src="/autoshop.png" alt="AutoShop Logo" className="h-10 w-10 object-contain" />
                 <span className="text-lg font-bold text-foreground">
-                  Auto Shop
+                  AutoShop
                 </span>
               </div>
               <p className="text-sm text-muted-foreground">{t("footerDesc")}</p>
@@ -322,7 +321,7 @@ export default function HomePage() {
             </div> */}
           </div>
           <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2025 Auto Shop. {t("rightsReserved")}</p>
+            <p>&copy; 2025 AutoShop. {t("rightsReserved")}</p>
           </div>
         </div>
       </footer>

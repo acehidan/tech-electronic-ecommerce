@@ -11,26 +11,26 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Auto Shop",
+  title: "AutoShop",
   description:
-    "Shop the latest fashion trends and clothing at unbeatable prices in Myanmar Kyat (MMK). Free delivery on orders over 50,000 MMK.",
+    "Shop the latest home electronics at AutoShop. Smart TVs, refrigerators, and kitchen appliances at best prices in Myanmar. Official warranty and express delivery.",
   generator: "otas",
   icons: {
     icon: [
       {
-        url: "/otas.png",
+        url: "/autoshop.png",
         media: "(prefers-color-scheme: light)",
       },
       {
-        url: "/otas.png",
+        url: "/autoshop.png",
         media: "(prefers-color-scheme: dark)",
       },
       {
-        url: "/otas.png",
-        type: "image/svg+xml",
+        url: "/autoshop.png",
+        type: "image/png",
       },
     ],
-    apple: "/otas.png",
+    apple: "/autoshop.png",
   },
 };
 

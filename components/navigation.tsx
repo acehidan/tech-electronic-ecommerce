@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { ShoppingCart, User, Search, Menu, Globe, ShoppingBag, Home, Shirt } from "lucide-react";
+import { ShoppingCart, User, Search, Menu, Globe, ShoppingBag, Home, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -53,18 +53,18 @@ export function Navigation() {
         <div className="md:hidden w-full flex flex-col py-3 px-4 gap-5">
           {/* Top row: Logo + Search + Cart */}
           <div className="flex items-center gap-3 w-full">
-            <Link href="/" className="shrink-0 flex items-center justify-center p-1.5 h-10 w-10 bg-green-50 rounded-full border border-green-200 overflow-hidden">
-               <span className="text-green-700 text-[10px] font-black leading-tight text-center block">Auto<br/>Shop</span>
+            <Link href="/" className="shrink-0 flex items-center justify-center h-10 w-10 overflow-hidden">
+               <Image src="/autoshop.png" alt="AutoShop Logo" width={40} height={40} className="object-contain" />
             </Link>
             <form onSubmit={handleSearch} className="relative flex-1 z-50">
               <Input
                 type="text"
-                placeholder="အထည်တွေရှာမယ်"
+                placeholder={t("searchPlaceholder")}
                 value={searchQuery}
                 onFocus={() => setShowSuggestions(true)}
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-4 pr-10 py-5 rounded-[16px] border border-gray-200 text-sm focus-visible:ring-[#007bff] bg-white shadow-sm"
+                className="w-full pl-4 pr-10 py-5 rounded-[16px] border border-gray-200 text-sm focus-visible:ring-[#2216a8] bg-white shadow-sm"
               />
               <button type="submit" className="absolute right-3.5 top-1/2 -translate-y-1/2">
                 <Search className="h-4 w-4 text-black" strokeWidth={2.5} />
@@ -98,7 +98,7 @@ export function Navigation() {
                           <div className="font-semibold text-[13px] truncate text-foreground leading-tight mb-0.5">
                             {language === "my" && (product as any).name_my ? (product as any).name_my : product.name}
                           </div>
-                          <div className="text-[12px] text-[#007bff] font-bold">
+                          <div className="text-[12px] text-[#2216a8] font-bold">
                             {formatPrice(product.price)}
                           </div>
                         </div>
@@ -114,7 +114,7 @@ export function Navigation() {
             )}
             </form>
             <button
-                className="relative bg-white border border-gray-200 text-[#007bff] rounded-[16px] shrink-0 h-[42px] w-[42px] flex items-center justify-center shadow-sm"
+                className="relative bg-white border border-gray-200 text-[#2216a8] rounded-[16px] shrink-0 h-[42px] w-[42px] flex items-center justify-center shadow-sm"
                 onClick={openCart}
             >
               <ShoppingCart className="h-5 w-5" />
@@ -129,12 +129,12 @@ export function Navigation() {
           {/* Bottom row: Tabs */}
           <div className="flex items-center justify-center gap-8 mb-1">
             <Link href="/" className="flex items-center gap-1.5">
-              <Home className={`h-5 w-5 ${pathname === '/' ? 'text-[#007bff]' : 'text-gray-400'}`} />
-              <span className={`text-[15px] font-bold ${pathname === '/' ? 'text-[#007bff]' : 'text-gray-400'}`}>ပင်မ</span>
+              <Home className={`h-5 w-5 ${pathname === '/' ? 'text-[#2216a8]' : 'text-gray-400'}`} />
+              <span className={`text-[15px] font-bold ${pathname === '/' ? 'text-[#2216a8]' : 'text-gray-400'}`}>{t("home")}</span>
             </Link>
             <Link href="/products" className="flex items-center gap-1.5">
-              <Shirt className={`h-5 w-5 ${pathname === '/products' || pathname.startsWith('/product/') ? 'text-[#007bff]' : 'text-gray-400'}`} />
-              <span className={`text-[15px] font-bold ${pathname === '/products' || pathname.startsWith('/product/') ? 'text-[#007bff]' : 'text-gray-400'}`}>အဝတ်အထည်များ</span>
+              <Monitor className={`h-5 w-5 ${pathname === '/products' || pathname.startsWith('/product/') ? 'text-[#2216a8]' : 'text-gray-400'}`} />
+              <span className={`text-[15px] font-bold ${pathname === '/products' || pathname.startsWith('/product/') ? 'text-[#2216a8]' : 'text-gray-400'}`}>{t("products")}</span>
             </Link>
           </div>
         </div>
@@ -142,20 +142,20 @@ export function Navigation() {
         {/* Desktop Navigation */}
         <div className="hidden md:flex container mx-auto px-4 h-[84px] items-center justify-between gap-8">
           {/* Logo */}
-          <Link href="/" className="shrink-0 flex items-center justify-center p-1.5 h-12 w-12 bg-green-50 rounded-full border border-green-200 overflow-hidden hover:opacity-90 transition-opacity">
-             <span className="text-green-700 text-[11px] font-black leading-tight text-center block">Auto<br/>Shop</span>
+          <Link href="/" className="shrink-0 flex items-center justify-center h-12 w-12 overflow-hidden hover:opacity-90 transition-opacity">
+             <Image src="/autoshop.png" alt="AutoShop Logo" width={48} height={48} className="object-contain" />
           </Link>
 
           {/* Search Bar - Desktop */}
           <form onSubmit={handleSearch} className="flex-1 max-w-2xl relative z-50">
             <Input
               type="text"
-              placeholder="အထည်တွေရှာမယ်"
+              placeholder={t("searchPlaceholder")}
               value={searchQuery}
               onFocus={() => setShowSuggestions(true)}
               onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-5 pr-12 py-6 rounded-[20px] border border-gray-200 text-[15px] focus-visible:ring-[#007bff] bg-white shadow-sm"
+              className="w-full pl-5 pr-12 py-6 rounded-[20px] border border-gray-200 text-[15px] focus-visible:ring-[#2216a8] bg-white shadow-sm"
             />
             <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2 hover:scale-110 transition-transform">
               <Search className="h-5 w-5 text-black" strokeWidth={2.5} />
@@ -189,7 +189,7 @@ export function Navigation() {
                           <div className="font-semibold text-[15px] truncate text-foreground leading-tight mb-1">
                             {language === "my" && (product as any).name_my ? (product as any).name_my : product.name}
                           </div>
-                          <div className="text-[13px] text-[#007bff] font-bold">
+                          <div className="text-[13px] text-[#2216a8] font-bold">
                             {formatPrice(product.price)}
                           </div>
                         </div>
@@ -209,19 +209,19 @@ export function Navigation() {
           <div className="flex items-center gap-8 shrink-0">
             <nav className="flex items-center gap-6">
               <Link href="/" className="flex items-center gap-2 group">
-                <Home className={`h-[22px] w-[22px] transition-colors ${pathname === '/' ? 'text-[#007bff]' : 'text-gray-400 group-hover:text-[#007bff]'}`} />
-                <span className={`text-[16px] font-bold transition-colors ${pathname === '/' ? 'text-[#007bff]' : 'text-gray-500 group-hover:text-[#007bff]'}`}>ပင်မ</span>
+                <Home className={`h-[22px] w-[22px] transition-colors ${pathname === '/' ? 'text-[#2216a8]' : 'text-gray-400 group-hover:text-[#2216a8]'}`} />
+                <span className={`text-[16px] font-bold transition-colors ${pathname === '/' ? 'text-[#2216a8]' : 'text-gray-500 group-hover:text-[#2216a8]'}`}>{t("home")}</span>
               </Link>
               <Link href="/products" className="flex items-center gap-2 group">
-                <Shirt className={`h-[22px] w-[22px] transition-colors ${pathname === '/products' || pathname.startsWith('/product/') ? 'text-[#007bff]' : 'text-gray-400 group-hover:text-[#007bff]'}`} />
-                <span className={`text-[16px] font-bold transition-colors ${pathname === '/products' || pathname.startsWith('/product/') ? 'text-[#007bff]' : 'text-gray-500 group-hover:text-[#007bff]'}`}>အဝတ်အထည်များ</span>
+                <Monitor className={`h-[22px] w-[22px] transition-colors ${pathname === '/products' || pathname.startsWith('/product/') ? 'text-[#2216a8]' : 'text-gray-400 group-hover:text-[#2216a8]'}`} />
+                <span className={`text-[16px] font-bold transition-colors ${pathname === '/products' || pathname.startsWith('/product/') ? 'text-[#2216a8]' : 'text-gray-500 group-hover:text-[#2216a8]'}`}>{t("products")}</span>
               </Link>
             </nav>
 
             <div className="w-px h-8 bg-gray-200"></div>
 
             <button
-                className="relative bg-white border border-gray-200 hover:border-[#007bff]/50 text-[#007bff] hover:bg-blue-50/50 transition-all rounded-[16px] shrink-0 h-[48px] w-[48px] flex items-center justify-center shadow-sm group"
+                className="relative bg-white border border-gray-200 hover:border-[#2216a8]/50 text-[#2216a8] hover:bg-blue-50/50 transition-all rounded-[16px] shrink-0 h-[48px] w-[48px] flex items-center justify-center shadow-sm group"
                 onClick={openCart}
             >
               <ShoppingCart className="h-[22px] w-[22px] group-hover:scale-105 transition-transform" />
