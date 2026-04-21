@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingBag, Monitor } from "lucide-react";
+import { ShoppingBag, Monitor, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useCart } from "@/lib/cart-context";
 import { useLanguage } from "@/lib/language-context";
+import { cn } from "@/lib/utils";
 
 interface ProductCardProps {
   id: string;
@@ -27,11 +28,20 @@ export function ProductCard({
   reviews,
   image,
 }: ProductCardProps) {
-  const { addItem } = useCart();
+  const { items, addItem } = useCart();
   const { t } = useLanguage();
 
+  const isInCart = items.some((item) => item.productId === id);
+
   return (
-    <Card className="group overflow-hidden hover:shadow-md transition-all duration-300 rounded-2xl border border-gray-100 bg-white shadow-sm">
+    <Card 
+      className={cn(
+        "group overflow-hidden hover:shadow-md transition-all duration-300 rounded-2xl border shadow-sm",
+        isInCart 
+          ? "border-green-600 bg-green-50/50 shadow-green-100/50" 
+          : "border-gray-100 bg-white"
+      )}
+    >
       <Link href={`/product/${id}`}>
         <div className="relative aspect-[4/3] overflow-hidden bg-secondary w-full">
           <Image
@@ -40,6 +50,12 @@ export function ProductCard({
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
+          {isInCart && (
+            <div className="absolute top-3 right-3 z-10 bg-green-600 text-white px-2 py-1 rounded-full text-[10px] font-bold flex items-center gap-1 shadow-lg animate-in fade-in zoom-in duration-300">
+              <Check className="w-3 h-3" />
+              {t("inCart")}
+            </div>
+          )}
         </div>
       </Link>
       <CardContent className="p-4 pt-5 pb-5 flex flex-col gap-5">
@@ -61,19 +77,33 @@ export function ProductCard({
 
         <div className="flex items-center gap-2 w-full">
           <Button
-            className="flex-1 bg-[#2216a8] hover:bg-[#3a2dbb] text-white rounded-xl h-[42px] sm:h-11 flex items-center justify-center gap-1 sm:gap-1.5 text-[0.8rem] sm:text-sm font-bold shadow-none border border-[#2216a8] hover:border-[#3a2dbb]"
+            className={cn(
+              "flex-1 rounded-xl h-[42px] sm:h-11 flex items-center justify-center gap-1 sm:gap-1.5 text-[0.8rem] sm:text-sm font-bold shadow-none border transition-all duration-300",
+              isInCart 
+                ? "bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700" 
+                : "bg-[#2216a8] hover:bg-[#3a2dbb] text-white border-[#2216a8] hover:border-[#3a2dbb]"
+            )}
             onClick={(e) => {
               e.preventDefault();
               addItem(id, 1, false);
             }}
           >
-            {t("addToCart")}
-            <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            {isInCart ? t("inCart") : t("addToCart")}
+            {isInCart ? (
+              <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            ) : (
+              <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            )}
           </Button>
           <Link href={`/product/${id}`} className="flex-1 flex" onClick={(e) => e.stopPropagation()}>
             <Button
               variant="outline"
-              className="w-full border border-[#2216a8] text-[#2216a8] hover:text-[#3a2dbb] hover:bg-blue-50/50 rounded-xl h-[42px] sm:h-11 flex items-center justify-center gap-1 sm:gap-1.5 text-[0.8rem] sm:text-sm font-bold bg-white"
+              className={cn(
+                "w-full rounded-xl h-[42px] sm:h-11 flex items-center justify-center gap-1 sm:gap-1.5 text-[0.8rem] sm:text-sm font-bold transition-all duration-300",
+                isInCart
+                  ? "border-green-600 text-green-600 hover:bg-green-50 bg-white"
+                  : "border-[#2216a8] text-[#2216a8] hover:text-[#3a2dbb] hover:bg-blue-50/50 bg-white"
+              )}
             >
               {t("viewAll").includes("အားလုံး") ? "ကြည့်မယ်" : "View"}
               <Monitor className="w-3.5 h-3.5 sm:w-4 sm:h-4" />

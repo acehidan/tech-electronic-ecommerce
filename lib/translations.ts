@@ -60,6 +60,7 @@ export const translations = {
     cat_activewear: "Audio Systems",
 
     // Cart
+    inCart: "In Cart",
     yourCart: "Shopping Cart",
     cartEmpty: "Your cart is empty",
     cartEmptyDesc: "Looks like you haven't added any electronics to your cart yet.",
@@ -191,6 +192,7 @@ export const translations = {
     cat_activewear: "အသံစနစ်များ",
 
     // Cart
+    inCart: "ထည့်ပြီး",
     yourCart: "စျေးဝယ်ခြင်း",
     cartEmpty: "စျေးဝယ်ခြင်းတွင် ပစ္စည်းမရှိပါ",
     cartEmptyDesc: "စျေးဝယ်ခြင်းတွင် အီလက်ထရွန်နစ် ပစ္စည်းများ ထည့်သွင်းထားခြင်း မရှိသေးပါ။",
